@@ -1,148 +1,43 @@
-# # Задача 1. Создайте программу для игры в "Крестики-нолики".
+# Вводится список целых чисел в одну строчку через пробел. Необходимо оставить в нем только двузначные числа.
+# Реализовать программу с использованием функции filter. Результат отобразить на экране в виде последовательности
+# оставшихся чисел в одну строчку через пробел.
+# [1,2,3,4,22,234,24] ----> [22, 24]
 
-# table = list(range(1,10))
-
-# def draw_table(table):
-#     print ("-" * 13)
-#     for i in range(3):
-#         print ("|", table[0+i*3], "|", table[1+i*3], "|", table[2+i*3], "|")
-#         print ("-" * 13)
-
-# def user_input(player_step):
-#     valid = False
-#     while not valid:
-#         player_answer = input("Где рисуем " + player_step + " ? ")
-#         try:
-#             player_answer = int(player_answer)
-#         except:
-#             print ("Неправильный ввод! Вы уверены, что ввели число?")
-#             continue
-#         if player_answer >= 1 and player_answer <= 9:
-#             if (str(table[player_answer-1]) not in "XO"):
-#                 table[player_answer-1] = player_step
-#                 valid = True
-#             else:
-#                 print ("Сюда нельзя, - клетка уже занята...")
-#         else:
-#             print ("Неправильный ввод! Введите число от 1 до 9 чтобы походить.")
-
-# def check_win(table):
-#     win_combo = ((0,1,2),(3,4,5),(6,7,8),(0,3,6),(1,4,7),(2,5,8),(0,4,8),(2,4,6))
-#     for i in win_combo:
-#         if table[i[0]] == table[i[1]] == table[i[2]]:
-#             return table[i[0]]
-#     return False
-
-# def main(table):
-#     counter = 0
-#     win = False
-#     while not win:
-#         draw_table(table)
-#         if counter % 2 == 0:
-#             user_input("X")
-#         else:
-#             user_input("O")
-#         counter += 1
-#         if counter > 4:
-#             tmp = check_win(table)
-#             if tmp:
-#                 print (f'Поздравляю! - {tmp} Выиграл!')
-#                 win = True
-#                 break
-#         if counter == 9:
-#             print ("Ничья!")
-#             break
-#     draw_table(table)
-
-# main(table)
+# data = list(map(int,input('Введите числа через пробел: ').split()))
+# print(data)
+# res = list(filter(lambda x: x >= 10 and x <= 99, data))
+# # res = ''.join(map(str, filter(lambda i: 9 < abs(i) < 100, data)))
+# print(f'Двухзначные числа: {res}')
 
 
-# # Задача 2. Напишите программу вычисления арифметического выражения заданного строкой. Используйте операции +,-,/,*. приоритет операций стандартный.
-# # Пример: 2+2 => 4;
-# #         1+2*3 => 7;
-# #         1-2*3 => -5;
-# # Добавьте возможность использования скобок, меняющих приоритет операций.
-# # Пример: 1+2*3 => 7;
-# #         (1+2)*3 => 9;
+# Дан список, вывести отдельно буквы и цифры, пользуясь filter.
+# [12,'sadf',5643] ---> ['sadf'] ,[12,5643]
+# Все задачи решать с помощью использования лямбд, filter, map, zip, enumerate, List Comprehension
 
-# task = input('Введите пример: ')
-# #task = '11+2*3-1'
-# #task = '17 - 5 * 6 / 3 - 2 + 4 / 2'
-# #task = '9 - 2 * 3 / 3 - 2 + 4 / 2'
-# #task = '17 - 5 * 6 - 2 + 4 / 2'
-# #task = '1 - 2*3'
+# data = [12, 'sadf', 5643]
+# print(data)
+# res = list(filter(lambda x: type(x) == int , data))
+# res2 = list(filter(lambda x: type(x) == str, data))
+# print(f'Числа: {res}')
+# print(f'Строки: {res2}')
 
-# task = task.replace(' ', '')
-# print(task)
+# Напишите программу, которая принимает на вход вещественное число и показывает сумму его цифр.
+# Пример:
+# - 6782 -> 23
+# - 0, 56 -> 11
 
-# def mult(task):
-#     a = task.index("*")
-#     answer = int(task[a-1]) * int(task[a+1])
-#     if len(task) == 3:
-#         task = str(answer)
-#     else:
-#         task = task[0:a-1] + str(answer) + task[a+2:]
-#     return task
 
-# def div(task):
-#     a = task.index("/")
-#     answer = int(task[a-1]) // int(task[a+1])
-#     if len(task) == 3:
-#         task = str(answer)
-#     else:
-#         task = task[0:a-1] + str(answer) + task[a+2:]
-#     return task
+# data = input('Введите число: ')
+# spisok = list(filter(lambda x: x.isdigit(), data))
+# spisok = [int(item) for item in spisok]
+# print(sum(spisok))
 
-# def sum(task):
-#     a = task.index("+")
-#     answer = int(task[a-1]) + int(task[a+1])
-#     if len(task) == 3:
-#         task = str(answer)
-#     else:
-#         task = task[0:a-1] + str(answer) + task[a+2:]
-#     return task
+# data = float(input('Введите вещественное число: '))
+# data = str(data)
+# spisok = list(filter(lambda x: x.isdigit(), data))
+# spisok = [int(item) for item in spisok]
+# print(sum(spisok))
 
-# def diff(task):
-#     a = task.index("-")
-#     answer = int(task[a-1]) - int(task[a+1])
-#     if len(task) == 3:
-#         task = str(answer)
-#     else:
-#         task = task[0:a-1] + str(answer) + task[a+2:]
-#     return task
-
-# if '*' in task:
-#     counter = task.count('*')
-#     if counter > 1:
-#         for i in range(counter):
-#             task = mult(task)
-#     else: 
-#         task = mult(task)
-#     #print(task)
-
-# if '/' in task:
-#     counter = task.count('/')
-#     if counter > 1:
-#         for i in range(counter):
-#             task = div(task)
-#     else: 
-#         task = div(task)
-#     #print(task)
-
-# if '+' in task:
-#     counter = task.count('+')
-#     if counter > 1:
-#         for i in range(counter):
-#             task = sum(task)
-#     else: 
-#         task = sum(task)
-#     #print(task)
-
-# if '-' in task:
-#     counter = task.count('-')
-#     if counter > 1:
-#         for i in range(counter):
-#             task = diff(task)
-#     else: 
-#         task = diff(task)
-#     print(task)
+# data = input('Введите вещественное число: ')
+# summa = sum(map(int, data.replace('.','').replace('-','')))
+# print(summa)
